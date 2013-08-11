@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'digi';
+    src: url('http://cssdeck.com/uploads/resources/fonts/digii/DS-DIGII.TTF');
+}
+
+body {
+    background-color: gray;
+}
+
+#info {
+    font-family: 'digi'; 
+}
+
+#container {
+    margin: auto;
+    width: 75%;
+    text-align: center;
+}
+
+#countdown {
+    font-size: 180px;
+    border: 2px solid black;
+    max-width: 60%; 
+    margin: 20px auto;
+}
+
+#round {
+    font-size: 56px;
+    margin-bottom: 2%;
+}
+
+#buttons {
+    margin: 5%;
+}
+
+#start-stop {
+    background-color:green;
+}
+
+#reset {
+    background-color:teal;
+}
+
+.button {
+    font-size: 40px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px 10px;
+    min-width: 150px;
+}
