@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>HIIT Round Timer</title>
+        <meta name="author" content="Fred Thomsen">
+        <meta name="description" content="A HTML5 Workout Timer">
+        <meta name="keywords" content="Timer,Workout,HIIT,MMA,Crossfit,Wrestling,BJJ,Boxing,Muay Thai,Training">
+        <link rel="copyright" href="creativecommons.org/licenses/by-sa/3.0/">
+        <link rel="copyright" href="www.gnu.org/copyleft/fdl.html">
+        <link rel="license" href="creativecommons.org/licenses/by-sa/3.0/">
+        <link rel="license" href="www.gnu.org/copyleft/fdl.html">
+        <script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+        <link rel="stylesheet" href="css/roundtimer_screen.css">
+    </head>
+    <body>
+        <div id="container">
+            <div id="info">
+                <div id="countdown">
+                    <span id="minutes">
+                        <span class="digit">0</span>
+                        <span class="digit">0</span>
+                    </span>
+
+                    <span class="deliminator">:</span>
+
+                    <span id="seconds">
+                        <span class="digit">0</span>
+                        <span class="digit">0</span>
+                    </span>
+                </div>
+                <div id="round">
+                    Round: <span id="cur-round">0</span> / <span id="total-round">20</span>
+                </div>
+            </div>
+            <div id="buttons">
+                <span id="start-stop" class="button">Start</span>
+                <span id="reset" class="button">Reset</span>
+            </div>
+            <div id="settings">
+                <form>
+                    <label>Round Time (secs)
+                        <input type="number" step="5" min="5" max="1800" value="30" id="worktime" name="worktime">
+                    </label>
+                    <label>Rest Time (secs)
+                        <input type="number" step="5" min="0" max="600" value="10" id="resttime" name="resttime">
+                    </label>
+                    <label>Total Rounds
+                        <input type="number" step="5" min="1" max="500" value="20" id="totalrounds" name="totalrounds">
+                    </label>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript" src="scripts/roundtimer.js"></script>
+    </body>
+</html>
