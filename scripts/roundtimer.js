@@ -2,6 +2,7 @@ var timer;
 var curWorkTime;
 var curRestTime;
 var curRound;
+var inProgress;
 
 $(document).ready(function() {
     var init = function() {
@@ -17,6 +18,8 @@ $(document).ready(function() {
         curRound = 0;
 
         renderClock(curWorkTime);
+
+        inProgress = false;
     };
 
     var startClock = function() {
@@ -24,40 +27,58 @@ $(document).ready(function() {
         var resttime = $("#resttime").val();
         var totalrounds = $("#totalrounds").val();
 
+        $("#startround")[0].play();
+
         if(curRound == 0) {
             curRound = 1;
             $("#cur-round").text(curRound);
         }
 
         timer = setInterval(function() {
-            $("#countdown").css("background-color", "green");
-
-            curWorkTime -= 1;
-            renderClock(curWorkTime);
-
-            if(curWorkTime == 0) {
+            if(curWorkTime <= 0) {
+                
                 clearInterval(timer);
 
-                timer = setInterval(function() {
-                    $("#countdown").css("background-color", "red");
+                if(curRound == totalrounds) {
+                    $("#countdown").css("background-color", "gray");
+                    $("#endworkout")[0].play();
 
-                    curRestTime -= 1;
-                    renderClock(curRestTime);
+                    controlsToStart();
+                }
+                else
+                {
+                    $("#endround")[0].play();
 
-                    if(curRestTime == 0) {
-                        clearInterval(timer);
-                        if(curRound < totalrounds) {
-                            curRound++;
-                            $("#cur-round").text(curRound);
+                    timer = setInterval(function() {
 
-                            curWorkTime = worktime;
-                            curRestTime = resttime;
+                        if(curRestTime <= 0) {
+                            clearInterval(timer);
+                            if(curRound < totalrounds) {
+                                curRound++;
+                                $("#cur-round").text(curRound);
 
-                            startClock();
+                                curWorkTime = worktime;
+                                curRestTime = resttime;
+
+                                startClock();
+                            }
                         }
-                    }
-                }, 1000);
+                        else {
+                            $("#countdown").css("background-color", "red");
 
+                            renderClock(curRestTime);
+                            curRestTime -= 1;
+                            renderClock(curRestTime);
+                        }
+                    }, 1000);
+                }
+            }
+            else {
+                $("#countdown").css("background-color", "green");
+
+                renderClock(curWorkTime);
+                curWorkTime -= 1;
+                renderClock(curWorkTime);
             }
         }, 1000);
     };
@@ -80,30 +101,48 @@ $(document).ready(function() {
         $("#seconds :last-child").text(seconds);
     };
 
+    var controlsToStart = function() {
+        $("#start-stop").text("Start"); 
+        $("#start-stop").css("background-color", "green");
+
+        $("#worktime").prop('disabled', false);
+        $("#resttime").prop('disabled', false);
+        $("#totalrounds").prop('disabled', false);
+        $("#startdelay").prop('disabled', false);
+    }
+
+    var controlsToStop = function() {
+        $("#start-stop").text("Stop");
+        $("#start-stop").css("background-color", "red");
+
+        $("#worktime").prop('disabled', true);
+        $("#resttime").prop('disabled', true);
+        $("#totalrounds").prop('disabled', true);
+        $("#startdelay").prop('disabled', true);
+    }
+
     init();
 
     $("#start-stop").click(function() {
         if($("#start-stop").text() == "Start")
         {
-            $("#start-stop").text("Stop");
-            $("#start-stop").css("background-color", "red");
+            controlsToStop();
 
-            $("#worktime").prop('disabled', true);
-            $("#resttime").prop('disabled', true);
-            $("#totalrounds").prop('disabled', true);
-
-            setTimeout(function() { 
+            if(inProgress) {
                 startClock();
-            }, 3000);
+            }
+            else
+            {
+                setTimeout(function() { 
+                    startClock();
+                }, $("startdelay").val());
+            }
+
+            inProgress = true;
         }
         else
         {
-            $("#start-stop").text("Start"); 
-            $("#start-stop").css("background-color", "green");
-
-            $("#worktime").prop('disabled', false);
-            $("#resttime").prop('disabled', false);
-            $("#totalrounds").prop('disabled', false);
+            controlsToStart();
 
             stopClock();
         }
@@ -111,8 +150,18 @@ $(document).ready(function() {
 
     $("#reset").click(function() {
         stopClock();
+        controlsToStart();
         init();
     });
+
+    $("#settings").hover(
+        function() {
+            $("#settings").animate({'left': '+=115'}, "fast");
+        },
+        function() {
+            $("#settings").animate({'left': '-=115'}, "fast");
+        }
+    );
 
     $("#worktime").change(init);
     $("#resttime").change(init);

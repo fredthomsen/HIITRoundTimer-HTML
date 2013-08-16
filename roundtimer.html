@@ -14,6 +14,15 @@
         <link rel="stylesheet" href="css/roundtimer_screen.css">
     </head>
     <body>
+        <audio id="startround">
+            <source src="sounds/startround.mp3" type="audio/mp3">
+        </audio>
+        <audio id="endworkout">
+            <source src="sounds/endworkout.mp3" type="audio/mp3">
+        </audio>
+        <audio id="endround">
+            <source src="sounds/endround.mp3" type="audio/mp3">
+        </audio>
         <div id="container">
             <div id="info">
                 <div id="countdown">
@@ -39,15 +48,19 @@
             </div>
             <div id="settings">
                 <form>
-                    <label>Round Time (secs)
+                    <table>
+                        <label>Round Time (secs)</label>
                         <input type="number" step="5" min="5" max="1800" value="30" id="worktime" name="worktime">
-                    </label>
-                    <label>Rest Time (secs)
+
+                        <label>Rest Time (secs)</label>
                         <input type="number" step="5" min="0" max="600" value="10" id="resttime" name="resttime">
-                    </label>
-                    <label>Total Rounds
+
+                        <label>Start Delay (secs)</label>
+                        <input type="number" step="1" min="0" max="30" value="5" id="startdelay" name="startdelay">
+
+                        <label>Total Rounds</label>
                         <input type="number" step="5" min="1" max="500" value="20" id="totalrounds" name="totalrounds">
-                    </label>
+                    </table>
                 </form>
             </div>
         </div>

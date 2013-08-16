@@ -7,6 +7,15 @@ body {
     background-color: gray;
 }
 
+label {
+    display:block;
+    margin:5px;
+}
+
+audio {
+    visibility: hidden;
+}
+
 #info {
     font-family: 'digi'; 
 }
@@ -43,8 +52,37 @@ body {
 
 .button {
     font-size: 40px;
-    border: 1px solid black;
+    border: 3px outset white;
     border-radius: 5px;
     margin: 10px 10px;
+    padding: 10px;
     min-width: 150px;
 }
+
+.button:hover {
+    cursor: pointer;
+}
+
+#settings {
+    position: absolute;
+    top: 0px;
+    left: -115px;
+    margin: 0px;
+    border: ridge white;
+    border-width: 0px 3px 0px 0px;
+    height: 100%;
+    background-color: #CCCCCC;
+}
+
+/*
+#settings:hover {
+    left: 0px;
+}
+*/
+
+#settings label {
+}
+
+#settings input {
+}
+
