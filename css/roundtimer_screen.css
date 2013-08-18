@@ -66,7 +66,8 @@ audio {
 #settings {
     position: absolute;
     top: 0px;
-    left: -115px;
+    left: -165px;
+    padding: 30px;
     margin: 0px;
     border: ridge white;
     border-width: 0px 3px 0px 0px;
@@ -74,15 +75,14 @@ audio {
     background-color: #CCCCCC;
 }
 
-/*
-#settings:hover {
-    left: 0px;
-}
-*/
-
-#settings label {
+#presets {
+    margin-top: 30px;
+    text-align:left;
 }
 
-#settings input {
+#slideicon {
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    right: 5px;
 }
-

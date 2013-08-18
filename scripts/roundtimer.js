@@ -105,20 +105,14 @@ $(document).ready(function() {
         $("#start-stop").text("Start"); 
         $("#start-stop").css("background-color", "green");
 
-        $("#worktime").prop('disabled', false);
-        $("#resttime").prop('disabled', false);
-        $("#totalrounds").prop('disabled', false);
-        $("#startdelay").prop('disabled', false);
+        $("#settings").find("input").prop('disabled', false);
     }
 
     var controlsToStop = function() {
         $("#start-stop").text("Stop");
         $("#start-stop").css("background-color", "red");
 
-        $("#worktime").prop('disabled', true);
-        $("#resttime").prop('disabled', true);
-        $("#totalrounds").prop('disabled', true);
-        $("#startdelay").prop('disabled', true);
+        $("#settings").find("input").prop('disabled', true);
     }
 
     init();
@@ -135,7 +129,7 @@ $(document).ready(function() {
             {
                 setTimeout(function() { 
                     startClock();
-                }, $("startdelay").val());
+                }, $("#startdelay").val() * 1000);
             }
 
             inProgress = true;
@@ -156,12 +150,53 @@ $(document).ready(function() {
 
     $("#settings").hover(
         function() {
-            $("#settings").animate({'left': '+=115'}, "fast");
+            $("#settings").animate({'left': '+=165'}, "fast");
         },
         function() {
-            $("#settings").animate({'left': '-=115'}, "fast");
+            $("#settings").animate({'left': '-=165'}, "fast");
         }
     );
+
+    $(".preset").change( function() {
+        if($("#mmatitle-s").is(":checked")) {
+            $("#worktime").val(5 * 60);
+            $("#resttime").val(60);
+            $("#totalrounds").val(5);
+        }
+        else if($("#mma-s").is(":checked")) {
+            $("#worktime").val(5 * 60);
+            $("#resttime").val(60);
+            $("#totalrounds").val(3);
+        } 
+        else if($("#muaythaititle-s").is(":checked")) {
+            $("#worktime").val(3 * 60);
+            $("#resttime").val(60);
+            $("#totalrounds").val(5);
+        }
+        else if($("#muaythai-s").is(":checked")) {
+            $("#worktime").val(3 * 60);
+            $("#resttime").val(60);
+            $("#totalrounds").val(3);
+        }
+        else if($("#boxing-s").is(":checked")) {
+            $("#worktime").val(3 * 60);
+            $("#resttime").val(60);
+            $("#totalrounds").val(12);
+        }
+        else if($("#bjj-s").is(":checked")) {
+            $("#worktime").val(6 * 60);
+            $("#resttime").val(120);
+            $("#totalrounds").val(4);
+        } 
+        else if($("#tabata-s").is(":checked")) {
+            $("#worktime").val(20);
+            $("#resttime").val(10);
+            $("#totalrounds").val(40);
+        }
+
+
+        init();
+    });
 
     $("#worktime").change(init);
     $("#resttime").change(init);
