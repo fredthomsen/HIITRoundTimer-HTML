@@ -14,8 +14,9 @@ $(document).ready(function() {
         $("#cur-round").text("0");
 
         curWorkTime = worktime;
-        curRestTime = resttime;
         curRound = 0;
+
+        disableJump();
 
         renderClock(curWorkTime);
 
@@ -28,6 +29,8 @@ $(document).ready(function() {
         var totalrounds = $("#totalrounds").val();
 
         $("#startround")[0].play();
+
+        enableJump();
 
         if(curRound == 0) {
             curRound = 1;
@@ -47,6 +50,8 @@ $(document).ready(function() {
                 }
                 else
                 {
+                    curRestTime = resttime;
+
                     $("#endround")[0].play();
 
                     timer = setInterval(function() {
@@ -57,8 +62,11 @@ $(document).ready(function() {
                                 curRound++;
                                 $("#cur-round").text(curRound);
 
+                                if(curRound == totalrounds) {
+                                    disableJump();
+                                }
+
                                 curWorkTime = worktime;
-                                curRestTime = resttime;
 
                                 startClock();
                             }
@@ -88,6 +96,38 @@ $(document).ready(function() {
         $("#countdown").css("background-color", "gray");
     };
 
+    var jumpToNextRest = function() {
+        var resttime = $("#resttime").val();
+        var totalrounds = $("#totalrounds").val();
+
+        if(curRestTime) {
+            if(curRound < totalrounds) {
+                curRestTime = resttime;
+                curRound++;
+                $("#cur-round").text(curRound);
+            }
+        }
+        else {
+            curWorkTime = 0;
+        }
+    };
+
+    var jumpToNextWork = function() {
+        var worktime = $("#worktime").val();
+        var totalrounds = $("#totalrounds").val();
+
+        if(curWorkTime) {
+            if(curRound < totalrounds) {
+                curWorkTime = worktime;
+                curRound++;
+                $("#cur-round").text(curRound);
+            }
+        }
+        else {
+            curRestTime = 0;
+        }    
+    };
+
     var renderClock = function(worktime) {
         var tenminutes = Math.floor(worktime/600);
         var minutes = Math.floor((worktime - (tenminutes * 600))/60);
@@ -113,6 +153,14 @@ $(document).ready(function() {
         $("#start-stop").css("background-color", "red");
 
         $("#settings").find("input").prop('disabled', true);
+    }
+
+    var disableJump = function() {
+        $("#buttons").find(".jump").prop('disabled', true);
+    }
+
+    var enableJump = function() {
+        $("#buttons").find(".jump").prop('disabled', false);
     }
 
     init();
@@ -146,6 +194,14 @@ $(document).ready(function() {
         stopClock();
         controlsToStart();
         init();
+    });
+
+    $("#nextrest").click(function() {
+        jumpToNextRest();
+    });
+
+    $("#nextwork").click(function() {
+        jumpToNextWork();
     });
 
     $("#settings").hover(
