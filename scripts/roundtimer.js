@@ -30,9 +30,9 @@ $(document).ready(function() {
 
         $("#startround")[0].play();
 
-        enableJump();
 
         if(curRound == 0) {
+            enableJump();
             curRound = 1;
             $("#cur-round").text(curRound);
         }
