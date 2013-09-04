@@ -25,11 +25,12 @@
         <audio id="endround">
             <source src="res/sounds/endround.mp3" type="audio/mp3">
         </audio>
-        <a href="https://github.com/fredthomsen/HITTRoundTimer-HTML"><img style="position: absolute; top: 0; right: 0; border: 0;" src="res/imgs/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+<!--
+<a href="https://github.com/fredthomsen/HIITRoundTimer-HTML"><img style="position: absolute; top: 0; right: 0; border: 0;" src="res/imgs/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+-->
         <header>
             <img type="image/png" src="res/icons/roundtimer-16.png">
-            HITT Training Timer
-            <img type="image/png" src="res/icons/roundtimer-16.png">
+            HIIT Training Timer
         </header>
         <div id="container">
             <div id="info">
@@ -51,31 +52,25 @@
                 </div>
             </div>
             <br />
+            <h2 id="slideicon">Settings&gt;&gt;</h2>
             <hr />
-            <div id="buttons">
-                <button id="start-stop" type="button">Start</button>
-                <button id="reset" type="button">Reset</button>
-                <br/>
-                <button id="nextrest" class="jump" type="button">Next Rest</button>
-                <button id="nextwork" class="jump" type="button">Next Work</button>
-            </div>
             <div id="settings">
                 <form>
-                    <h2>Settings</h2>
-                    <label>Round Time (secs)</label>
-                    <input type="number" step="5" min="5" max="1800" value="30" id="worktime" name="worktime">
+                    <div id="settune">
+                        <label>Round Time (secs)</label>
+                        <input type="number" step="5" min="5" max="1800" value="30" id="worktime" name="worktime">
 
-                    <label>Rest Time (secs)</label>
-                    <input type="number" step="5" min="0" max="600" value="10" id="resttime" name="resttime">
+                        <label>Rest Time (secs)</label>
+                        <input type="number" step="5" min="0" max="600" value="10" id="resttime" name="resttime">
 
-                    <label>Total Rounds</label>
-                    <input type="number" step="5" min="1" max="500" value="20" id="totalrounds" name="totalrounds">
+                        <label>Total Rounds</label>
+                        <input type="number" step="5" min="1" max="500" value="20" id="totalrounds" name="totalrounds">
 
-                    <label>Start Delay (secs)</label>
-                    <input type="number" step="1" min="0" max="60" value="2" id="startdelay" name="startdelay">
+                        <label>Start Delay (secs)</label>
+                        <input type="number" step="1" min="0" max="60" value="2" id="startdelay" name="startdelay">
+                    </div>
 
                     <div id="presets">
-                        <h2>Presets</h2>
                         <input type="radio" id="mmatitle-s" class="preset" value="mmatitle" name="preset" />MMA (Title)<br/>
                         <input type="radio" id="mma-s" class="preset" value="mma" name="preset" />MMA<br/>
                         <input type="radio" id="muaythaititle-s" class="preset" value="muaythaititle" name="preset" />Muay Thai (Title)<br/>
@@ -86,9 +81,13 @@
                         <input type="radio" id="tabata-s" class="preset" value="tabata" name="preset" />Crossfit - Tabata<br/>
                     </div>
                 </form>
-                <div id="slideicon">
-                    &gt;&gt;
-                </div>
+            </div>
+            <div id="buttons">
+                <button id="start-stop" class="start" type="button">Start</button>
+                <button id="reset" type="button">Reset</button>
+                <br/>
+                <button id="nextrest" class="jump" type="button">Next Rest</button>
+                <button id="nextwork" class="jump" type="button">Next Work</button>
             </div>
         </div>
         <script type="text/javascript" src="scripts/roundtimer.js"></script>

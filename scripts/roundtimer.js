@@ -72,7 +72,8 @@ $(document).ready(function() {
                             }
                         }
                         else {
-                            $("#countdown").css("background-color", "red");
+                            $("#countdown").toggleClass("rest", true);
+                            $("#countdown").toggleClass("work", false);
 
                             renderClock(curRestTime);
                             curRestTime -= 1;
@@ -82,7 +83,8 @@ $(document).ready(function() {
                 }
             }
             else {
-                $("#countdown").css("background-color", "green");
+                $("#countdown").toggleClass("rest", false);
+                $("#countdown").toggleClass("work", true);
 
                 renderClock(curWorkTime);
                 curWorkTime -= 1;
@@ -142,15 +144,17 @@ $(document).ready(function() {
     };
 
     var controlsToStart = function() {
-        $("#start-stop").text("Start"); 
-        $("#start-stop").css("background-color", "green");
+        $("#start-stop").text("Start");
+        $("#start-stop").toggleClass("start", true);
+        $("#start-stop").toggleClass("stop", false);
 
         $("#settings").find("input").prop('disabled', false);
     }
 
     var controlsToStop = function() {
         $("#start-stop").text("Stop");
-        $("#start-stop").css("background-color", "red");
+        $("#start-stop").toggleClass("start", false);
+        $("#start-stop").toggleClass("stop", true);
 
         $("#settings").find("input").prop('disabled', true);
     }
@@ -204,12 +208,16 @@ $(document).ready(function() {
         jumpToNextWork();
     });
 
-    $("#settings").hover(
+    $("#slideicon").hover(
         function() {
-            $("#settings").animate({'left': '+=165'}, "fast");
+//            $("#settings").animate({'left': '+=165'}, "fast");
+            $("#settings").css('display', 'block');
+            $("#buttons").css('display', 'none');
         },
         function() {
-            $("#settings").animate({'left': '-=165'}, "fast");
+//            $("#settings").animate({'left': '-=165'}, "fast");
+            $("#settings").css('display', 'none');
+            $("#buttons").css('display', 'block');
         }
     );
 

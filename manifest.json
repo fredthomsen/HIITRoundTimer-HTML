@@ -1,7 +1,7 @@
 {
-    "name": "HITT Round Timer",
-    "description": "High Interval Training Timer with a few presets and the ability to jump to the next rest and next work round.",
-    "version": "0.1",
+    "name": "HIIT Training Timer",
+    "description": "High Intensity Interval Training Timer with a few presets and the ability to jump to the next rest and next work round.",
+    "version": "0.1.1",
     "app": {
         "background": {
             "scripts": ["scripts/chromeapp_background.js"]

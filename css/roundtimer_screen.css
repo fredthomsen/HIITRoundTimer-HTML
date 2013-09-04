@@ -3,9 +3,18 @@
     src: url(../res/fonts/DS-DIGII.TTF);
 }
 
+html {
+    height: 100%;
+}
+
 body {
     background-color: gray;
-    margin: 0px;
+    margin: 0;
+    background-image: linear-gradient(gray,black);
+    background-repeat: no-repeat;
+    backgound-attachment: fixed;
+    height: 100%;
+    overflow: hidden;
 }
 
 label {
@@ -21,9 +30,14 @@ header {
     background-color: black;
     color: white;
     font-size: 26px;
-    border-width: 0px 0px 4px 0px;
+    border-width: 0px 0px 2px 0px;
     border-style: ridge;
-    border-color: darkgray;
+    border-color: black;
+    font-family:'Trebuchet MS';
+}
+
+header img{
+    margin: auto 10px;
 }
 
 audio {
@@ -41,6 +55,7 @@ audio {
 }
 
 #countdown {
+    background-color:gray;
     font-size: 180px;
     border: 2px solid black;
     border-radius: 10px;
@@ -57,12 +72,30 @@ audio {
     margin: 5%;
 }
 
-#start-stop {
+.start {
     background-color:green;
+    text-shadow: 0 -1px 1px darkgreen;
+    border: 3px outset darkgreen;
+}
+
+.work {
+    background-color:green;
+}
+
+.stop {
+    background-color:red;
+    text-shadow: 0 -1px 1px darkred;
+    border: 3px outset darkred;
+}
+
+.rest {
+    background-color:red;
 }
 
 #reset {
     background-color:teal;
+    text-shadow: 0 -1px 1px darkcyan;
+    border: 3px outset darkcyan;
 }
 #nextwork, #nextrest {
     background-color: dimgray;
@@ -70,32 +103,38 @@ audio {
 
 button {
     font-size: 40px;
-    border: 3px outset white;
-    border-radius: 7px;
+    border: 3px outset lightgray;
+    border-radius: 10px;
     margin: 10px 10px;
     padding: 10px;
     width: 300px;
 }
 
-button:hover {
+button:hover:enabled {
     cursor: pointer;
     opacity: 0.7;
 }
 
 button:disabled {
     background-color: gray;
+    border: 3px solid lightgray;
+}
+
+hr {
+    margin: auto 0px;
 }
 
 #settings {
-    position: absolute;
-    top: 0px;
-    left: -165px;
     padding: 30px;
     margin: 0px;
     border: ridge white;
     border-width: 0px 3px 0px 0px;
     height: 100%;
     background-color: #CCCCCC;
+    display: none;
+}
+
+#settune {
 }
 
 #presets {
@@ -105,9 +144,13 @@ button:disabled {
 
 #slideicon {
     font-weight: bold;
-    position: absolute;
-    top: 50%;
-    right: 5px;
+    margin: 0px auto;
+    text-align: center;
+    border-style: inset;
+    border-color: black;
+    border-width: 2px 2px 0px 2px;
+    background-color:gray;
+    max-width: 20%;
 }
 
 #bell {

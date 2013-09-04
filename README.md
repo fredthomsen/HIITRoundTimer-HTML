@@ -1,4 +1,4 @@
-HITTRoundTimer-HTML
+HIITRoundTimer-HTML
 ===================
 
-HTML5 High Interval Training Timer
+HTML5 High Intensity Interval Training Timer
