@@ -52,35 +52,43 @@
                 </div>
             </div>
             <br />
-            <h2 id="slideicon">Settings&gt;&gt;</h2>
-            <hr />
-            <div id="settings">
-                <form>
-                    <div id="settune">
-                        <label>Round Time (secs)</label>
-                        <input type="number" step="5" min="5" max="1800" value="30" id="worktime" name="worktime">
+            <div id="settingContainer">
+                <h2 id="slideicon">Settings</h2>
+                <hr />
+                <div id="settings">
+                    <form>
+                        <div id="settune">
+                            <table>
+                                <tr>
+                                    <td><label>Round Time (secs)</label></td>
+                                    <td><input type="number" step="5" min="5" max="1800" value="30" id="worktime" name="worktime"></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Rest Time (secs)</label>
+                                    <td><input type="number" step="5" min="0" max="600" value="10" id="resttime" name="resttime"></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Total Rounds</label>
+                                    <td><input type="number" step="5" min="1" max="500" value="20" id="totalrounds" name="totalrounds"></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Start Delay (secs)</label>
+                                    <td><input type="number" step="1" min="0" max="60" value="2" id="startdelay" name="startdelay"></td>
+                                </tr>
+                            </table>
+                        </div>
 
-                        <label>Rest Time (secs)</label>
-                        <input type="number" step="5" min="0" max="600" value="10" id="resttime" name="resttime">
-
-                        <label>Total Rounds</label>
-                        <input type="number" step="5" min="1" max="500" value="20" id="totalrounds" name="totalrounds">
-
-                        <label>Start Delay (secs)</label>
-                        <input type="number" step="1" min="0" max="60" value="2" id="startdelay" name="startdelay">
-                    </div>
-
-                    <div id="presets">
-                        <input type="radio" id="mmatitle-s" class="preset" value="mmatitle" name="preset" />MMA (Title)<br/>
-                        <input type="radio" id="mma-s" class="preset" value="mma" name="preset" />MMA<br/>
-                        <input type="radio" id="muaythaititle-s" class="preset" value="muaythaititle" name="preset" />Muay Thai (Title)<br/>
-                        <input type="radio" id="muaythai-s" class="preset" value="muaythai" name="preset" />Muay Thai<br/>
-                        <input type="radio" id="boxing-s" class="preset" value="boxing" name="preset" />Boxing<br/>
-                        <input type="radio" id="wrestling-s" class="preset" value="wrestling" name="preset" />Wrestling<br/>
-                        <input type="radio" id="bjj-s" class="preset" value="bjj" name="preset" />BJJ<br/>
-                        <input type="radio" id="tabata-s" class="preset" value="tabata" name="preset" />Crossfit - Tabata<br/>
-                    </div>
-                </form>
+                        <div id="presets">
+                            <input type="radio" id="mmatitle-s" class="preset" value="mmatitle" name="preset" />MMA (Title)<br/>
+                            <input type="radio" id="mma-s" class="preset" value="mma" name="preset" />MMA<br/>
+                            <input type="radio" id="muaythaititle-s" class="preset" value="muaythaititle" name="preset" />Muay Thai (Title)<br/>
+                            <input type="radio" id="muaythai-s" class="preset" value="muaythai" name="preset" />Muay Thai<br/>
+                            <input type="radio" id="boxing-s" class="preset" value="boxing" name="preset" />Boxing<br/>
+                            <input type="radio" id="tabata-s" class="preset" value="tabata" name="preset" />Crossfit - Tabata<br/>
+                        </div>
+                        <div class=clear></div>
+                    </form>
+                </div>
             </div>
             <div id="buttons">
                 <button id="start-stop" class="start" type="button">Start</button>

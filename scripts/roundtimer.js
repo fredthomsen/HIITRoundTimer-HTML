@@ -3,6 +3,7 @@ var curWorkTime;
 var curRestTime;
 var curRound;
 var inProgress;
+var settingTimeoutId;
 
 $(document).ready(function() {
     var init = function() {
@@ -16,8 +17,11 @@ $(document).ready(function() {
         curWorkTime = worktime;
         curRound = 0;
 
+        showSettings();
         disableJump();
 
+        $("#countdown").toggleClass("idle", true);
+        
         renderClock(curWorkTime);
 
         inProgress = false;
@@ -27,6 +31,9 @@ $(document).ready(function() {
         var worktime = $("#worktime").val();
         var resttime = $("#resttime").val();
         var totalrounds = $("#totalrounds").val();
+
+        hideSettings();
+        $("#countdown").toggleClass("idle", false);
 
         $("#startround")[0].play();
 
@@ -43,8 +50,9 @@ $(document).ready(function() {
                 clearInterval(timer);
 
                 if(curRound == totalrounds) {
-                    $("#countdown").css("background-color", "gray");
                     $("#endworkout")[0].play();
+                    $("#countdown").toggleClass("work", false);
+                    $("#countdown").toggleClass("idle", true);
 
                     controlsToStart();
                 }
@@ -95,7 +103,6 @@ $(document).ready(function() {
 
     var stopClock = function() {
         clearInterval(timer);
-        $("#countdown").css("background-color", "gray");
     };
 
     var jumpToNextRest = function() {
@@ -149,6 +156,8 @@ $(document).ready(function() {
         $("#start-stop").toggleClass("stop", false);
 
         $("#settings").find("input").prop('disabled', false);
+
+        showSettings();
     }
 
     var controlsToStop = function() {
@@ -157,6 +166,8 @@ $(document).ready(function() {
         $("#start-stop").toggleClass("stop", true);
 
         $("#settings").find("input").prop('disabled', true);
+
+        hideSettings();
     }
 
     var disableJump = function() {
@@ -165,6 +176,14 @@ $(document).ready(function() {
 
     var enableJump = function() {
         $("#buttons").find(".jump").prop('disabled', false);
+    }
+
+    var showSettings = function() {
+        $("#slideicon").css('visibility', 'visible');
+    }
+
+    var hideSettings = function() {
+        $("#slideicon").css('visibility', 'hidden');
     }
 
     init();
@@ -208,18 +227,30 @@ $(document).ready(function() {
         jumpToNextWork();
     });
 
-    $("#slideicon").hover(
-        function() {
-//            $("#settings").animate({'left': '+=165'}, "fast");
-            $("#settings").css('display', 'block');
-            $("#buttons").css('display', 'none');
-        },
-        function() {
-//            $("#settings").animate({'left': '-=165'}, "fast");
-            $("#settings").css('display', 'none');
-            $("#buttons").css('display', 'block');
+    $("#slideicon").mouseenter( function() {
+        if(!settingTimeoutId) {
+            settingTimeoutId = setTimeout(function() {
+                settingTimeoutId = null;
+                $("#buttons").fadeOut('fast', function() {
+                        $("hr").css("display", "none");
+                        $("#settings").slideDown();
+                });
+            }, 500);
         }
-    );
+    });
+
+    $("#settingContainer").mouseleave( function() {
+        if (settingTimeoutId) {
+            clearTimeout(settingTimeoutId);
+            settingTimeoutId = null;
+        }
+        else {
+            $("#settings").slideUp('fast', function() {
+                $("hr").css("display", "block");
+                $("#buttons").fadeIn();
+            });
+        }
+    });
 
     $(".preset").change( function() {
         if($("#mmatitle-s").is(":checked")) {
@@ -247,11 +278,6 @@ $(document).ready(function() {
             $("#resttime").val(60);
             $("#totalrounds").val(12);
         }
-        else if($("#bjj-s").is(":checked")) {
-            $("#worktime").val(6 * 60);
-            $("#resttime").val(120);
-            $("#totalrounds").val(4);
-        } 
         else if($("#tabata-s").is(":checked")) {
             $("#worktime").val(20);
             $("#resttime").val(10);

@@ -18,8 +18,8 @@ body {
 }
 
 label {
-    display:block;
     margin:5px;
+    text-align: left;
 }
 
 h2 {
@@ -55,7 +55,6 @@ audio {
 }
 
 #countdown {
-    background-color:gray;
     font-size: 180px;
     border: 2px solid black;
     border-radius: 10px;
@@ -92,6 +91,10 @@ audio {
     background-color:red;
 }
 
+.idle {
+    background-color:gray;
+}
+
 #reset {
     background-color:teal;
     text-shadow: 0 -1px 1px darkcyan;
@@ -125,21 +128,28 @@ hr {
 }
 
 #settings {
-    padding: 30px;
+    padding: 50px;
     margin: 0px;
-    border: ridge white;
-    border-width: 0px 3px 0px 0px;
+    border: outset gray 5px;
+    border-radius: 5px;
     height: 100%;
     background-color: #CCCCCC;
     display: none;
 }
 
 #settune {
+    float:left;
+    margin-left: 50px;
+}
+
+#settune td {
+    text-align: left;
 }
 
 #presets {
-    margin-top: 30px;
+    float:right;
     text-align:left;
+    margin-right: 300px;
 }
 
 #slideicon {
@@ -149,6 +159,8 @@ hr {
     border-style: inset;
     border-color: black;
     border-width: 2px 2px 0px 2px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     background-color:gray;
     max-width: 20%;
 }
@@ -161,4 +173,8 @@ hr {
     position: absolute;
     top: 25px;
     left: 75px;
+}
+
+.clear {
+    clear:both;
 }
