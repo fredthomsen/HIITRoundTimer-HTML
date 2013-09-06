@@ -253,7 +253,12 @@ $(document).ready(function() {
     });
 
     $(".preset").change( function() {
-        if($("#mmatitle-s").is(":checked")) {
+        if ($("#defaultw").is(":checked")) {
+            $("#worktime").val(30);
+            $("#resttime").val(10);
+            $("#totalrounds").val(20);
+        }
+        else if($("#mmatitle-s").is(":checked")) {
             $("#worktime").val(5 * 60);
             $("#resttime").val(60);
             $("#totalrounds").val(5);

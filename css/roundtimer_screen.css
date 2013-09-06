@@ -72,9 +72,9 @@ audio {
 }
 
 .start {
-    background-color:green;
+    background-image: linear-gradient(limegreen, darkgreen);
     text-shadow: 0 -1px 1px darkgreen;
-    border: 3px outset darkgreen;
+    border: 3px outset green;
 }
 
 .work {
@@ -82,7 +82,7 @@ audio {
 }
 
 .stop {
-    background-color:red;
+    background-image: linear-gradient(red, maroon);
     text-shadow: 0 -1px 1px darkred;
     border: 3px outset darkred;
 }
@@ -96,6 +96,7 @@ audio {
 }
 
 #reset {
+    background-image: linear-gradient(lightseagreen, teal);
     background-color:teal;
     text-shadow: 0 -1px 1px darkcyan;
     border: 3px outset darkcyan;
