@@ -22,6 +22,10 @@ label {
     text-align: left;
 }
 
+input {
+    width: 50px;
+}
+
 h2 {
     text-align: left;
 }
@@ -95,6 +99,11 @@ audio {
     background-color:gray;
 }
 
+.slider {
+    width: 300px;
+    margin: 0px 10px;
+}
+
 #reset {
     background-image: linear-gradient(lightseagreen, teal);
     background-color:teal;
@@ -129,7 +138,7 @@ hr {
 }
 
 #settings {
-    padding: 50px;
+    padding: 25px;
     margin: 0px;
     border: outset gray 5px;
     border-radius: 5px;
@@ -150,7 +159,7 @@ hr {
 #presets {
     float:right;
     text-align:left;
-    margin-right: 300px;
+    margin-right: 100px;
 }
 
 #slideicon {

@@ -12,8 +12,10 @@
         <link rel="license" href="www.gnu.org/copyleft/fdl.html">
         <link rel="icon" type="image/png" href="res/icons/roundtimer-16.png" />
         <script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="scripts/jquery-ui.js"></script>
         <link rel="stylesheet" type="text/css" href="css/roundtimer_handheld.css" media="handheld" />
         <link rel="stylesheet" type="text/css" href="css/roundtimer_screen.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" media="screen" />
     </head>
     <body>
         <audio id="startround">
@@ -60,20 +62,24 @@
                         <div id="settune">
                             <table>
                                 <tr>
-                                    <td><label>Round Time (secs)</label></td>
-                                    <td><input type="number" step="5" min="5" max="1800" value="30" id="worktime" name="worktime"></td>
+                                    <td><label for="worktime">Work Time</label></td>
+                                    <td><input type="text" id="worktime" name="worktime" /></td>
+                                    <td><div id="worktimeSlider" class="slider"></div></td>
                                 </tr>
                                 <tr>
-                                    <td><label>Rest Time (secs)</label>
-                                    <td><input type="number" step="5" min="0" max="600" value="10" id="resttime" name="resttime"></td>
+                                    <td><label for="resttime">Rest Time</label></td>
+                                    <td><input type="text" id="resttime" name="resttime" /></td>
+                                    <td><div id="resttimeSlider" class="slider"></div></td>
                                 </tr>
                                 <tr>
-                                    <td><label>Total Rounds</label>
-                                    <td><input type="number" step="5" min="1" max="500" value="20" id="totalrounds" name="totalrounds"></td>
+                                    <td><label for="totalrounds">Total Rounds</label></td>
+                                    <td><input type="number" id="totalrounds" name="totalrounds" min="1" max="50" /></td>
+                                    <td><div id="totalroundsSlider" class="slider"></div></td>
                                 </tr>
                                 <tr>
-                                    <td><label>Start Delay (secs)</label>
-                                    <td><input type="number" step="1" min="0" max="60" value="2" id="startdelay" name="startdelay"></td>
+                                    <td><label for="startdelay">Start Delay</label></td>
+                                    <td><input type="text" id="startdelay" name="startdelay" /></td>
+                                    <td><div id="startdelaySlider" class="slider"></div></td>
                                 </tr>
                             </table>
                         </div>

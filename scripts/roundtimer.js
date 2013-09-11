@@ -7,9 +7,9 @@ var settingTimeoutId;
 
 $(document).ready(function() {
     var init = function() {
-        var worktime = $("#worktime").val();
-        var resttime = $("#resttime").val();
-        var totalrounds = $("#totalrounds").val();
+        var worktime = toSeconds($("#worktime").val());
+        var resttime = toSeconds($("#resttime").val());
+        var totalrounds = $("#totalrounds").val()
 
         $("#total-round").text(totalrounds);
         $("#cur-round").text("0");
@@ -27,9 +27,29 @@ $(document).ready(function() {
         inProgress = false;
     };
 
+    var toSeconds = function(timeStr) {
+        var time = timeStr.split(":");
+        var mins = parseInt(time[0]);
+        var secs = parseInt(time[1]);
+
+        return (mins * 60) + secs;
+    }
+
+    var toTimeStr = function(seconds) {
+        return zeroPad(Math.floor(seconds/60), 1) + ":" + zeroPad(seconds%60, 2);
+    }
+
+    var zeroPad = function(num, size) {
+        var s = num + "";
+            while (s.length < size) {
+                s = "0" + s;
+            }
+        return s;
+    }
+
     var startClock = function() {
-        var worktime = $("#worktime").val();
-        var resttime = $("#resttime").val();
+        var worktime = toSeconds($("#worktime").val());
+        var resttime = toSeconds($("#resttime").val());
         var totalrounds = $("#totalrounds").val();
 
         hideSettings();
@@ -58,9 +78,10 @@ $(document).ready(function() {
                 }
                 else
                 {
-                    curRestTime = resttime;
-
-                    $("#endround")[0].play();
+                    if(curRestTime == 0 || isNaN(curRestTime)) {
+                        $("#endround")[0].play();
+                        curRestTime = resttime;
+                    }
 
                     timer = setInterval(function() {
 
@@ -106,7 +127,7 @@ $(document).ready(function() {
     };
 
     var jumpToNextRest = function() {
-        var resttime = $("#resttime").val();
+        var resttime = toSeconds($("#resttime").val());
         var totalrounds = $("#totalrounds").val();
 
         if(curRestTime) {
@@ -122,7 +143,7 @@ $(document).ready(function() {
     };
 
     var jumpToNextWork = function() {
-        var worktime = $("#worktime").val();
+        var worktime = toSeconds($("#worktime").val());
         var totalrounds = $("#totalrounds").val();
 
         if(curWorkTime) {
@@ -186,6 +207,57 @@ $(document).ready(function() {
         $("#slideicon").css('visibility', 'hidden');
     }
 
+    var initSliders = function() {
+        $("#worktimeSlider").slider({
+                  value: 30,
+                  min: 0,
+                  max: 1200,
+                  step: 5,
+                  slide: function( event, ui ) {
+                              $("#worktime").val(toTimeStr(ui.value));
+                              init();
+                         }
+        });
+        $("#worktime").val(toTimeStr($("#worktimeSlider").slider("value")));
+
+        $("#resttimeSlider").slider({
+                  value: 10,
+                  min: 0,
+                  max: 600,
+                  step: 5,
+                  slide: function(event, ui) {
+                              $("#resttime").val(toTimeStr(ui.value));
+                              init();
+                         }
+        });
+        $("#resttime").val(toTimeStr($("#resttimeSlider").slider("value")));
+
+
+        $("#totalroundsSlider").slider({
+                  value: 20,
+                  min: 1,
+                  max: 50,
+                  step: 1,
+                  slide: function(event, ui) {
+                              $("#totalrounds").val(ui.value);
+                              init();
+                         }
+        });
+        $("#totalrounds").val( $("#totalroundsSlider").slider("value"));
+
+        $( "#startdelaySlider" ).slider({
+                  value: 5,
+                  min: 0,
+                  max: 60,
+                  step: 5,
+                  slide: function(event, ui) {
+                              $("#startdelay").val(toTimeStr(ui.value));
+                         }
+        });
+        $("#startdelay").val(toTimeStr($("#startdelaySlider").slider("value")));
+    }
+
+    initSliders();
     init();
 
     $("#start-stop").click(function() {
@@ -200,7 +272,7 @@ $(document).ready(function() {
             {
                 setTimeout(function() { 
                     startClock();
-                }, $("#startdelay").val() * 1000);
+                }, toSeconds($("#startdelay").val()) * 1000);
             }
 
             inProgress = true;
@@ -211,6 +283,26 @@ $(document).ready(function() {
 
             stopClock();
         }
+    });
+
+    $(document).keydown(function (e) {
+       switch(e.keyCode) {
+           case $.ui.keyCode.SPACE: //space
+               $("#start-stop").click();
+               break;
+           case 88: //X
+               $("#reset").click();
+               break;
+           case 87: //W
+               $("#nextwork").click();
+               break;
+           case 82: //R
+               $("#nextrest").click();
+               break;
+           default:
+               return;
+           e.preventDefault();
+       }
     });
 
     $("#reset").click(function() {
@@ -252,43 +344,43 @@ $(document).ready(function() {
         }
     });
 
+
     $(".preset").change( function() {
         if ($("#defaultw").is(":checked")) {
-            $("#worktime").val(30);
-            $("#resttime").val(10);
+            $("#worktime").val("00:30");
+            $("#resttime").val("00:10");
             $("#totalrounds").val(20);
         }
         else if($("#mmatitle-s").is(":checked")) {
-            $("#worktime").val(5 * 60);
-            $("#resttime").val(60);
+            $("#worktime").val("5:00");
+            $("#resttime").val("1:00");
             $("#totalrounds").val(5);
         }
         else if($("#mma-s").is(":checked")) {
-            $("#worktime").val(5 * 60);
-            $("#resttime").val(60);
+            $("#worktime").val("5:00");
+            $("#resttime").val("1:00");
             $("#totalrounds").val(3);
         } 
         else if($("#muaythaititle-s").is(":checked")) {
-            $("#worktime").val(3 * 60);
-            $("#resttime").val(60);
+            $("#worktime").val("3:00");
+            $("#resttime").val("1:00");
             $("#totalrounds").val(5);
         }
         else if($("#muaythai-s").is(":checked")) {
-            $("#worktime").val(3 * 60);
-            $("#resttime").val(60);
+            $("#worktime").val("3:00");
+            $("#resttime").val("1:00");
             $("#totalrounds").val(3);
         }
         else if($("#boxing-s").is(":checked")) {
-            $("#worktime").val(3 * 60);
-            $("#resttime").val(60);
+            $("#worktime").val("3:00");
+            $("#resttime").val("1:00");
             $("#totalrounds").val(12);
         }
         else if($("#tabata-s").is(":checked")) {
-            $("#worktime").val(20);
-            $("#resttime").val(10);
+            $("#worktime").val("0:20");
+            $("#resttime").val("0:10");
             $("#totalrounds").val(40);
         }
-
 
         init();
     });
