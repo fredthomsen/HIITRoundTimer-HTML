@@ -5,6 +5,26 @@ var curRound;
 var inProgress;
 var settingTimeoutId;
 
+var toSeconds = function(timeStr) {
+    var time = timeStr.split(":");
+    var mins = parseInt(time[0]);
+    var secs = parseInt(time[1]);
+
+    return (mins * 60) + secs;
+}
+
+var toTimeStr = function(seconds) {
+    return zeroPad(Math.floor(seconds/60), 1) + ":" + zeroPad(seconds%60, 2);
+}
+
+var zeroPad = function(num, size) {
+    var s = num + "";
+        while (s.length < size) {
+            s = "0" + s;
+        }
+    return s;
+}
+
 $(document).ready(function() {
     var init = function() {
         var worktime = toSeconds($("#worktime").val());
@@ -26,26 +46,6 @@ $(document).ready(function() {
 
         inProgress = false;
     };
-
-    var toSeconds = function(timeStr) {
-        var time = timeStr.split(":");
-        var mins = parseInt(time[0]);
-        var secs = parseInt(time[1]);
-
-        return (mins * 60) + secs;
-    }
-
-    var toTimeStr = function(seconds) {
-        return zeroPad(Math.floor(seconds/60), 1) + ":" + zeroPad(seconds%60, 2);
-    }
-
-    var zeroPad = function(num, size) {
-        var s = num + "";
-            while (s.length < size) {
-                s = "0" + s;
-            }
-        return s;
-    }
 
     var startClock = function() {
         var worktime = toSeconds($("#worktime").val());
